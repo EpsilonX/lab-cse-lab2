@@ -1,0 +1,604 @@
+last_inum = 1
+unique: 1, opcode: INIT (26), nodeid: 0, insize: 56
+INIT: 7.13
+flags=0x0000007b
+max_readahead=0x00020000
+   INIT: 7.8
+   flags=0x00000000
+   max_readahead=0x00020000
+   max_write=0x00020000
+   unique: 1, error: 0 (Success), outsize: 40
+unique: 2, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+   unique: 2, error: -2 (No such file or directory), outsize: 16
+unique: 3, opcode: CREATE (35), nodeid: 1, insize: 54
+readdir in yfs:
+last_inum = 2
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 3, error: 0 (Success), outsize: 152
+OK: create returns.
+unique: 4, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 4, error: -38 (Function not implemented), outsize: 16
+unique: 5, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 5, error: 0 (Success), outsize: 112
+unique: 6, opcode: GETXATTR (22), nodeid: 2, insize: 68
+   unique: 6, error: -38 (Function not implemented), outsize: 16
+unique: 7, opcode: WRITE (16), nodeid: 2, insize: 664
+wb = 600
+   unique: 7, error: 0 (Success), outsize: 24
+unique: 8, opcode: FLUSH (25), nodeid: 2, insize: 64
+   unique: 8, error: -38 (Function not implemented), outsize: 16
+unique: 9, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 9, error: 0 (Success), outsize: 16
+unique: 10, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 10, error: 0 (Success), outsize: 136
+unique: 11, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 11, error: 0 (Success), outsize: 32
+unique: 12, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 12, error: -38 (Function not implemented), outsize: 16
+unique: 13, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 13, error: 0 (Success), outsize: 112
+unique: 14, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 14, error: 0 (Success), outsize: 112
+unique: 15, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=600
+   unique: 15, error: 0 (Success), outsize: 616
+unique: 16, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 16, error: 0 (Success), outsize: 112
+unique: 17, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 17, error: 0 (Success), outsize: 16
+unique: 18, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+   unique: 18, error: -2 (No such file or directory), outsize: 16
+unique: 19, opcode: CREATE (35), nodeid: 1, insize: 54
+readdir in yfs:
+last_inum = 3
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 0
+   unique: 19, error: 0 (Success), outsize: 152
+OK: create returns.
+unique: 20, opcode: ??? (39), nodeid: 3, insize: 72
+   unique: 20, error: -38 (Function not implemented), outsize: 16
+unique: 21, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 0
+   unique: 21, error: 0 (Success), outsize: 112
+unique: 22, opcode: WRITE (16), nodeid: 3, insize: 4160
+wb = 4096
+   unique: 22, error: 0 (Success), outsize: 24
+unique: 23, opcode: WRITE (16), nodeid: 3, insize: 79
+wb = 15
+   unique: 23, error: 0 (Success), outsize: 24
+unique: 24, opcode: RELEASE (18), nodeid: 3, insize: 64
+   unique: 24, error: 0 (Success), outsize: 16
+unique: 25, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 25, error: 0 (Success), outsize: 136
+unique: 26, opcode: OPEN (14), nodeid: 3, insize: 48
+fuseserver_open starts
+   unique: 26, error: 0 (Success), outsize: 32
+unique: 27, opcode: ??? (39), nodeid: 3, insize: 72
+   unique: 27, error: -38 (Function not implemented), outsize: 16
+unique: 28, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 28, error: 0 (Success), outsize: 112
+unique: 29, opcode: READ (15), nodeid: 3, insize: 80
+data.size()=4111
+   unique: 29, error: 0 (Success), outsize: 4127
+unique: 30, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 30, error: 0 (Success), outsize: 112
+unique: 31, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 31, error: 0 (Success), outsize: 112
+unique: 32, opcode: RELEASE (18), nodeid: 3, insize: 64
+   unique: 32, error: 0 (Success), outsize: 16
+unique: 33, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 33, error: 0 (Success), outsize: 136
+unique: 34, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 34, error: 0 (Success), outsize: 32
+unique: 35, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 35, error: -38 (Function not implemented), outsize: 16
+unique: 36, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 36, error: 0 (Success), outsize: 112
+unique: 37, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 37, error: 0 (Success), outsize: 112
+unique: 38, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=600
+   unique: 38, error: 0 (Success), outsize: 616
+unique: 39, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 39, error: 0 (Success), outsize: 112
+unique: 40, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 40, error: 0 (Success), outsize: 16
+unique: 41, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 600
+   unique: 41, error: 0 (Success), outsize: 136
+unique: 42, opcode: SETATTR (4), nodeid: 2, insize: 128
+fuseserver_setattr 0x208
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 42, error: 0 (Success), outsize: 112
+unique: 43, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 43, error: 0 (Success), outsize: 32
+unique: 44, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 44, error: -38 (Function not implemented), outsize: 16
+unique: 45, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 45, error: 0 (Success), outsize: 112
+unique: 46, opcode: WRITE (16), nodeid: 2, insize: 339
+wb = 275
+   unique: 46, error: 0 (Success), outsize: 24
+unique: 47, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 47, error: 0 (Success), outsize: 16
+unique: 48, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 275
+   unique: 48, error: 0 (Success), outsize: 136
+unique: 49, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 49, error: 0 (Success), outsize: 32
+unique: 50, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 50, error: -38 (Function not implemented), outsize: 16
+unique: 51, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 275
+   unique: 51, error: 0 (Success), outsize: 112
+unique: 52, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 275
+   unique: 52, error: 0 (Success), outsize: 112
+unique: 53, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=275
+   unique: 53, error: 0 (Success), outsize: 291
+unique: 54, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 275
+   unique: 54, error: 0 (Success), outsize: 112
+unique: 55, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 55, error: 0 (Success), outsize: 16
+unique: 56, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 56, error: 0 (Success), outsize: 136
+unique: 57, opcode: OPEN (14), nodeid: 3, insize: 48
+fuseserver_open starts
+   unique: 57, error: 0 (Success), outsize: 32
+unique: 58, opcode: ??? (39), nodeid: 3, insize: 72
+   unique: 58, error: -38 (Function not implemented), outsize: 16
+unique: 59, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 59, error: 0 (Success), outsize: 112
+unique: 60, opcode: READ (15), nodeid: 3, insize: 80
+data.size()=4111
+   unique: 60, error: 0 (Success), outsize: 4127
+unique: 61, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 61, error: 0 (Success), outsize: 112
+unique: 62, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 62, error: 0 (Success), outsize: 112
+unique: 63, opcode: RELEASE (18), nodeid: 3, insize: 64
+   unique: 63, error: 0 (Success), outsize: 16
+unique: 64, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 275
+   unique: 64, error: 0 (Success), outsize: 136
+unique: 65, opcode: SETATTR (4), nodeid: 2, insize: 128
+fuseserver_setattr 0x208
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 65, error: 0 (Success), outsize: 112
+unique: 66, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 66, error: 0 (Success), outsize: 32
+unique: 67, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 67, error: -38 (Function not implemented), outsize: 16
+unique: 68, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 0
+   unique: 68, error: 0 (Success), outsize: 112
+unique: 69, opcode: WRITE (16), nodeid: 2, insize: 4160
+wb = 4096
+   unique: 69, error: 0 (Success), outsize: 24
+unique: 70, opcode: WRITE (16), nodeid: 2, insize: 4160
+wb = 4096
+   unique: 70, error: 0 (Success), outsize: 24
+unique: 71, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 71, error: 0 (Success), outsize: 16
+unique: 72, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 8192
+   unique: 72, error: 0 (Success), outsize: 136
+unique: 73, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 73, error: 0 (Success), outsize: 32
+unique: 74, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 74, error: -38 (Function not implemented), outsize: 16
+unique: 75, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 8192
+   unique: 75, error: 0 (Success), outsize: 112
+unique: 76, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 8192
+   unique: 76, error: 0 (Success), outsize: 112
+unique: 77, opcode: WRITE (16), nodeid: 2, insize: 4160
+wb = 4096
+   unique: 77, error: 0 (Success), outsize: 24
+unique: 78, opcode: WRITE (16), nodeid: 2, insize: 2975
+wb = 2911
+   unique: 78, error: 0 (Success), outsize: 24
+unique: 79, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 79, error: 0 (Success), outsize: 16
+unique: 80, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 80, error: 0 (Success), outsize: 136
+unique: 81, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 81, error: 0 (Success), outsize: 32
+unique: 82, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 82, error: -38 (Function not implemented), outsize: 16
+unique: 83, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 83, error: 0 (Success), outsize: 112
+unique: 84, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=15199
+   unique: 84, error: 0 (Success), outsize: 15215
+unique: 85, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 85, error: 0 (Success), outsize: 112
+unique: 86, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 86, error: 0 (Success), outsize: 112
+unique: 87, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 87, error: 0 (Success), outsize: 16
+unique: 88, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 88, error: 0 (Success), outsize: 136
+unique: 89, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 89, error: 0 (Success), outsize: 32
+unique: 90, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 90, error: -38 (Function not implemented), outsize: 16
+unique: 91, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 91, error: 0 (Success), outsize: 112
+unique: 92, opcode: WRITE (16), nodeid: 2, insize: 81
+wb = 17
+   unique: 92, error: 0 (Success), outsize: 24
+unique: 93, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 93, error: 0 (Success), outsize: 16
+unique: 94, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 94, error: 0 (Success), outsize: 136
+unique: 95, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 95, error: 0 (Success), outsize: 32
+unique: 96, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 96, error: -38 (Function not implemented), outsize: 16
+unique: 97, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 97, error: 0 (Success), outsize: 112
+unique: 98, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=15199
+   unique: 98, error: 0 (Success), outsize: 15215
+unique: 99, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 99, error: 0 (Success), outsize: 112
+unique: 100, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 100, error: 0 (Success), outsize: 112
+unique: 101, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 101, error: 0 (Success), outsize: 16
+unique: 102, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 102, error: 0 (Success), outsize: 136
+unique: 103, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 103, error: 0 (Success), outsize: 32
+unique: 104, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 104, error: -38 (Function not implemented), outsize: 16
+unique: 105, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 15199
+   unique: 105, error: 0 (Success), outsize: 112
+unique: 106, opcode: WRITE (16), nodeid: 2, insize: 81
+yfs write new_size =65553
+ last_inum = 4
+last_inum = 5
+last_inum = 6
+last_inum = 7
+wb = 10
+   unique: 106, error: 0 (Success), outsize: 24
+unique: 107, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 107, error: 0 (Success), outsize: 16
+unique: 108, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 65553
+   unique: 108, error: 0 (Success), outsize: 136
+unique: 109, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 109, error: 0 (Success), outsize: 32
+unique: 110, opcode: ??? (39), nodeid: 2, insize: 72
+   unique: 110, error: -38 (Function not implemented), outsize: 16
+unique: 111, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 65553
+   unique: 111, error: 0 (Success), outsize: 112
+unique: 112, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=16384
+   unique: 112, error: 0 (Success), outsize: 16400
+unique: 113, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=0
+   unique: 113, error: 0 (Success), outsize: 16
+unique: 114, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 114, error: 0 (Success), outsize: 112
+unique: 115, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=0
+   unique: 115, error: 0 (Success), outsize: 16
+unique: 116, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 116, error: 0 (Success), outsize: 16
+unique: 117, opcode: LOOKUP (1), nodeid: 1, insize: 45
+readdir in yfs:
+   unique: 117, error: -2 (No such file or directory), outsize: 16
+unique: 118, opcode: LOOKUP (1), nodeid: 1, insize: 45
+readdir in yfs:
+   unique: 118, error: -2 (No such file or directory), outsize: 16
+unique: 119, opcode: LOOKUP (1), nodeid: 1, insize: 45
+readdir in yfs:
+   unique: 119, error: -2 (No such file or directory), outsize: 16
+unique: 120, opcode: OPENDIR (27), nodeid: 1, insize: 48
+   unique: 120, error: 0 (Success), outsize: 32
+unique: 121, opcode: READDIR (28), nodeid: 1, insize: 80
+fuseserver_readdir
+isfile: 1 is a dir
+readdir in yfs:
+   unique: 121, error: 0 (Success), outsize: 104
+unique: 122, opcode: LOOKUP (1), nodeid: 1, insize: 51
+readdir in yfs:
+   unique: 122, error: -2 (No such file or directory), outsize: 16
+unique: 123, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 123, error: 0 (Success), outsize: 136
+unique: 124, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 124, error: 0 (Success), outsize: 112
+unique: 125, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 125, error: 0 (Success), outsize: 136
+unique: 126, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 126, error: 0 (Success), outsize: 112
+unique: 127, opcode: READDIR (28), nodeid: 1, insize: 80
+fuseserver_readdir
+isfile: 1 is a dir
+readdir in yfs:
+   unique: 127, error: 0 (Success), outsize: 40
+unique: 128, opcode: RELEASEDIR (29), nodeid: 1, insize: 64
+   unique: 128, error: 0 (Success), outsize: 16
+unique: 129, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 129, error: 0 (Success), outsize: 136
+unique: 130, opcode: GETATTR (3), nodeid: 2, insize: 56
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 130, error: 0 (Success), outsize: 112
+unique: 131, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 2 is a file
+getattr 0000000000000002 1
+isfile: 2 is a file
+   getattr -> 17
+   unique: 131, error: 0 (Success), outsize: 136
+unique: 132, opcode: OPEN (14), nodeid: 2, insize: 48
+fuseserver_open starts
+   unique: 132, error: 0 (Success), outsize: 32
+unique: 133, opcode: READ (15), nodeid: 2, insize: 80
+data.size()=17
+   unique: 133, error: 0 (Success), outsize: 33
+unique: 134, opcode: LOOKUP (1), nodeid: 1, insize: 55
+readdir in yfs:
+   unique: 134, error: -2 (No such file or directory), outsize: 16
+unique: 135, opcode: RELEASE (18), nodeid: 2, insize: 64
+   unique: 135, error: 0 (Success), outsize: 16
+unique: 136, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 136, error: 0 (Success), outsize: 136
+unique: 137, opcode: GETATTR (3), nodeid: 3, insize: 56
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 137, error: 0 (Success), outsize: 112
+unique: 138, opcode: LOOKUP (1), nodeid: 1, insize: 46
+readdir in yfs:
+isfile: 3 is a file
+getattr 0000000000000003 1
+isfile: 3 is a file
+   getattr -> 4111
+   unique: 138, error: 0 (Success), outsize: 136
+unique: 139, opcode: OPEN (14), nodeid: 3, insize: 48
+fuseserver_open starts
+   unique: 139, error: 0 (Success), outsize: 32
+unique: 140, opcode: READ (15), nodeid: 3, insize: 80
+data.size()=4111
+   unique: 140, error: 0 (Success), outsize: 4127
+unique: 141, opcode: RELEASE (18), nodeid: 3, insize: 64
+   unique: 141, error: 0 (Success), outsize: 16

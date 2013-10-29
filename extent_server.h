@@ -23,7 +23,8 @@ class extent_server {
   extent_server();
 
   int create(uint32_t type, extent_protocol::extentid_t &id);
-  int put(extent_protocol::extentid_t id, std::string, int &);
+  int put(extent_protocol::extentid_t id, std::string, int &,int size);
+  int put(extent_protocol::extentid_t id, const char*, int &,int size);
   int get(extent_protocol::extentid_t id, std::string &);
   int getattr(extent_protocol::extentid_t id, extent_protocol::attr &);
   int remove(extent_protocol::extentid_t id, int &);

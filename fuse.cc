@@ -130,10 +130,18 @@ fuseserver_setattr(fuse_req_t req, fuse_ino_t ino, struct stat *attr,
          * create a struct stat, fill it in using getattr, 
          * and reply back using fuse_reply_attr.
          */
-
-    } else {
-        fuse_reply_err(req, ENOSYS);
-    }
+		struct stat st;
+		yfs_client::status ret;
+		ret = yfs->setattr(ino,attr->st_size);
+		ret = getattr(ino,st);
+		if(ret != yfs_client::OK){
+			fuse_reply_err(req, ENOENT);
+			return;
+		}
+			fuse_reply_attr(req, &st, 0);
+		} else {
+			fuse_reply_err(req, ENOSYS);
+		}
 }
 
 //
@@ -157,6 +165,15 @@ fuseserver_read(fuse_req_t req, fuse_ino_t ino, size_t size,
      * note: you should use yfs->read to read the buffer of size;
      * and reply using fuse_reply_buf. 
      */
+	std::string data;
+	yfs_client::status ret;
+	ret = yfs->read(ino,size,off,data);
+	if (ret != yfs_client::OK){
+		fuse_reply_err(req, ENOENT);
+		return;
+	}
+	printf("data.size()=%d\n",data.size());
+	fuse_reply_buf(req,data.c_str(),data.size());
 
 }
 
@@ -185,8 +202,16 @@ fuseserver_write(fuse_req_t req, fuse_ino_t ino,
      * note: you should use yfs->write to write the buffer of size 
      * from off to ino;
      * and reply the length of bytes_written using fuse_reply_write.
-     */
-
+     */ 
+	yfs_client::status ret;
+	size_t wb;
+	ret = yfs->write(ino,size,off,buf,wb);
+	printf("wb = %d\n",wb);
+	if (ret != yfs_client::OK){
+		fuse_reply_err(req, ENOENT);
+		return;
+	}
+	fuse_reply_write(req,wb);
 }
 
 //
@@ -209,7 +234,7 @@ fuseserver_write(fuse_req_t req, fuse_ino_t ino,
 //
 yfs_client::status
 fuseserver_createhelper(fuse_ino_t parent, const char *name,
-        mode_t mode, struct fuse_entry_param *e)
+        mode_t mode, struct fuse_entry_param *e,int type)
 {
     // In yfs, timeouts are always set to 0.0, and generations are always set to 0
     e->attr_timeout = 0.0;
@@ -221,7 +246,11 @@ fuseserver_createhelper(fuse_ino_t parent, const char *name,
      * note: you should use yfs->create to create file or directory;
      * you alse need to fill the parameter e in.
      */
-
+	yfs_client::inum ino_out;
+	if(yfs->create(parent,name,mode,ino_out,type) == yfs_client::EXIST)
+		return yfs_client::EXIST;
+	e->ino = ino_out;
+	getattr(ino_out,e->attr);
     return yfs_client::OK;
 }
 
@@ -231,7 +260,7 @@ fuseserver_create(fuse_req_t req, fuse_ino_t parent, const char *name,
 {
     struct fuse_entry_param e;
     yfs_client::status ret;
-    if( (ret = fuseserver_createhelper( parent, name, mode, &e )) == yfs_client::OK ) {
+    if( (ret = fuseserver_createhelper( parent, name, mode, &e, extent_protocol::T_FILE )) == yfs_client::OK ) {
         fuse_reply_create(req, &e, fi);
         printf("OK: create returns.\n");
     } else {
@@ -247,8 +276,9 @@ void fuseserver_mknod( fuse_req_t req, fuse_ino_t parent,
         const char *name, mode_t mode, dev_t rdev ) {
     struct fuse_entry_param e;
     yfs_client::status ret;
-    if( (ret = fuseserver_createhelper( parent, name, mode, &e )) == yfs_client::OK ) {
-        fuse_reply_entry(req, &e);
+    if( (ret = fuseserver_createhelper( parent, name, mode, &e, extent_protocol::T_FILE )) == yfs_client::OK ) {
+        fuse_reply_entry(req, &e); 
+		printf("OK: mknod returns.\n");
     } else {
         if (ret == yfs_client::EXIST) {
             fuse_reply_err(req, EEXIST);
@@ -277,6 +307,21 @@ fuseserver_lookup(fuse_req_t req, fuse_ino_t parent, const char *name)
      * note: you should use yfs->lookup;
      * remember to return e using fuse_reply_entry.
      */
+	yfs_client::status ret;
+	bool found = false;
+	yfs_client::inum ino_out;
+	ret = yfs->lookup(parent,name,found,ino_out);
+	if(ret != yfs_client::OK){
+		fuse_reply_err(req, ENOENT);
+		return;
+	}
+	if(found){
+		e.ino = ino_out;
+		getattr(ino_out,e.attr);
+		fuse_reply_entry(req,&e);
+	}else{
+		fuse_reply_err(req, ENOENT);
+	}
 
 }
 
@@ -342,7 +387,15 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
      * all that's left for you to do is to get the dir listing from yfs,
      * and add it to the b data structure using dirbuf_add. 
      */
+	if(yfs->readdir(inum,list) != yfs_client::OK){
+		fuse_reply_err(req,ENOENT);
+		return;
+	}
 
+	for( std::list<yfs_client::dirent>::iterator it = list.begin();it != list.end();it++){
+		dirbuf_add(&b,(*it).name.c_str(),(*it).inum);
+	}
+	reply_buf_limited(req,b.p,b.size,off,size);	
 }
 
 
@@ -350,6 +403,7 @@ void
 fuseserver_open(fuse_req_t req, fuse_ino_t ino,
         struct fuse_file_info *fi)
 {
+	printf("fuseserver_open starts\n");
     fuse_reply_open(req, fi);
 }
 
@@ -380,6 +434,16 @@ fuseserver_mkdir(fuse_req_t req, fuse_ino_t parent, const char *name,
      * note: you can use fuseserver_createhelper;
      * remember to return e using fuse_reply_entry.
      */
+	 yfs_client::status ret;
+    if( (ret = fuseserver_createhelper( parent, name, mode, &e, extent_protocol::T_DIR)) == yfs_client::OK ) {
+        fuse_reply_entry(req, &e);
+    } else {
+        if (ret == yfs_client::EXIST) {
+            fuse_reply_err(req, EEXIST);
+        }else{
+            fuse_reply_err(req, ENOENT);
+        }
+    }
 
 }
 
@@ -399,7 +463,11 @@ fuseserver_unlink(fuse_req_t req, fuse_ino_t parent, const char *name)
      * success:	fuse_reply_err(req, 0);
      * not found: fuse_reply_err(req, ENOENT);
      */
-
+	
+	if(yfs->unlink(parent,name) != yfs_client::OK){
+		fuse_reply_err(req,ENOENT);
+	}
+	fuse_reply_err(req,0);
 }
 
 void
