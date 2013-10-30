@@ -172,7 +172,6 @@ fuseserver_read(fuse_req_t req, fuse_ino_t ino, size_t size,
 		fuse_reply_err(req, ENOENT);
 		return;
 	}
-	printf("data.size()=%d\n",data.size());
 	fuse_reply_buf(req,data.c_str(),data.size());
 
 }
@@ -206,7 +205,6 @@ fuseserver_write(fuse_req_t req, fuse_ino_t ino,
 	yfs_client::status ret;
 	size_t wb;
 	ret = yfs->write(ino,size,off,buf,wb);
-	printf("wb = %d\n",wb);
 	if (ret != yfs_client::OK){
 		fuse_reply_err(req, ENOENT);
 		return;
@@ -278,7 +276,6 @@ void fuseserver_mknod( fuse_req_t req, fuse_ino_t parent,
     yfs_client::status ret;
     if( (ret = fuseserver_createhelper( parent, name, mode, &e, extent_protocol::T_FILE )) == yfs_client::OK ) {
         fuse_reply_entry(req, &e); 
-		printf("OK: mknod returns.\n");
     } else {
         if (ret == yfs_client::EXIST) {
             fuse_reply_err(req, EEXIST);
@@ -369,7 +366,6 @@ fuseserver_readdir(fuse_req_t req, fuse_ino_t ino, size_t size,
     yfs_client::inum inum = ino; // req->in.h.nodeid;
     struct dirbuf b;
 
-    printf("fuseserver_readdir\n");
 
     if(!yfs->isdir(inum)){
         fuse_reply_err(req, ENOTDIR);
@@ -403,7 +399,6 @@ void
 fuseserver_open(fuse_req_t req, fuse_ino_t ino,
         struct fuse_file_info *fi)
 {
-	printf("fuseserver_open starts\n");
     fuse_reply_open(req, fi);
 }
 

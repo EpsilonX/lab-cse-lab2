@@ -252,6 +252,7 @@ inode_manager::read_file(uint32_t inum, char **buf_out, int *size)
   if(ino){
 	*size = ino->size;
 	ino->atime = tp.tv_nsec;
+	put_inode(inum,ino);
 	int new_size =((*size)/BLOCK_SIZE + 1)*BLOCK_SIZE; //NOTE:new_size is the actual size a file will use in disk, otherwise the program will have segment-fault problem. To fix this problem, I've spent the whole night!
 	*buf_out = (char*)malloc(sizeof(char)*new_size);
 	char *buf = *buf_out;
@@ -266,8 +267,6 @@ inode_manager::read_file(uint32_t inum, char **buf_out, int *size)
 		   ino = get_inode(ino->blocks[NDIRECT]); //get inode from No.33 block.
 		   buf += NDIRECT*BLOCK_SIZE; //NOTE:must increase the buf pointer
 	}
-	put_inode(inum,ino);
-
 }
   return;
 }

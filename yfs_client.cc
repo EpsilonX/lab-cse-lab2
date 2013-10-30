@@ -215,7 +215,6 @@ yfs_client::readdir(inum dir, std::list<dirent> &list)
      * note: you should parse the dirctory content using your defined format,
      * and push the dirents to the list.
      */
-	printf("readdir in yfs:\n");
 	std::string buf;
 	fileinfo fin;
 	if(getfile(dir,fin)!= OK){
@@ -232,7 +231,6 @@ yfs_client::readdir(inum dir, std::list<dirent> &list)
 		iss >> d.name >> d.inum;
 		list.push_back(d);
 	} while (iss);
-	//printf("buf is = %s",buf.c_str());
     return r;
 }
 
@@ -248,13 +246,7 @@ yfs_client::read(inum ino, size_t size, off_t off, std::string &data)
 	if(ec->get(ino,data) != extent_protocol::OK){
 		return IOERR;
 	}
-	if(off>data.size()){
-		data = "";
-	    return r;
-	}
-	if(size+off>data.size()) size = data.size()-off;
 	data = data.substr(off,size);
-	std::replace(data.begin(),data.end(),'+','\0');
     return r;
 }
 
@@ -283,8 +275,6 @@ yfs_client::write(inum ino, size_t size, off_t off, const char *data,
 	int new_size = off+size;
 	if(off > buf.size())
 	{	
-	//	buf.resize(off+size,'\0');
-	//	buf.replace(off,size,new_data);
 		char* new_buff = new char[new_size];
 		for(int i=0;i<buf.size();i++)
 			new_buff[i] = buf[i];
@@ -292,11 +282,11 @@ yfs_client::write(inum ino, size_t size, off_t off, const char *data,
 			new_buff[i] = '\0';
 		for(int i=off;i<off+size;i++)
 			new_buff[i] = new_data[i-off];
-		printf("yfs write new_size =%d\n ",new_size); 
 		if(ec->put(ino,new_buff,new_size) != extent_protocol::OK){
 			delete new_buff;
 			return IOERR;
 		}
+		bytes_written = size;
 		delete new_buff;
 		return r;
 	}else if(off + size > buf.size()) {
